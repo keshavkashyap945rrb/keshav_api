@@ -66,6 +66,61 @@ namespace Project_WebAPI.Controllers
             return Ok(forecast);
         }
 
+        [HttpGet("LoginMobileAPI")]
+        public ActionResult<WeatherForecast> LoginMobileAPI(string Mobile)
+        {
+            var forecast = _context.login.Where(x => x.Test == Mobile);
+            if (forecast == null)
+            {
+                return NotFound("Authentication Failed");
+            }
+
+            //// if(forecast.IsNullOrEmpty<>)
+            //// Convert the result to a DataTable
+            //DataTable dataTable = new DataTable();
+            //dataTable.Columns.Add("Email", typeof(string));
+            //dataTable.Columns.Add("Password", typeof(string));
+            //// Add other columns as needed
+
+            //foreach (var item in forecast)
+            //{
+            //    DataRow row = dataTable.NewRow();
+            //    row["Email"] = item.Email;
+            //    row["Password"] = item.Password;
+            //    // Add other columns as needed
+
+            //    dataTable.Rows.Add(row);
+            //}
+            return Ok(forecast);
+        }
+
+        [HttpGet("LoginMobilePassAPI")]
+        public ActionResult<WeatherForecast> LoginMobilePassAPI(string Mobile, string Password)
+        {
+            var forecast = _context.login.Where(x => x.Mobile == Mobile && x.Password == Password);
+            if (forecast.IsNullOrEmpty())
+            {
+                return NotFound("Authentication Failed");
+            }
+            //// if(forecast.IsNullOrEmpty<>)
+            //// Convert the result to a DataTable
+            //DataTable dataTable = new DataTable();
+            //dataTable.Columns.Add("Email", typeof(string));
+            //dataTable.Columns.Add("Password", typeof(string));
+            //// Add other columns as needed
+
+            //foreach (var item in forecast)
+            //{
+            //    DataRow row = dataTable.NewRow();
+            //    row["Email"] = item.Email;
+            //    row["Password"] = item.Password;
+            //    // Add other columns as needed
+
+            //    dataTable.Rows.Add(row);
+            //}
+            return Ok(forecast);
+        }
+
         [HttpPost("create")]
         public ActionResult<WeatherForecast> Post([FromBody] WeatherForecast forecast)
         {
